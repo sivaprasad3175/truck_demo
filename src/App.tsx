@@ -2,7 +2,6 @@ import { useState } from "react";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
-import { BrowserRouter } from "react-router-dom";
 
 export default function App() {
   const [page, setPage] = useState("login");
@@ -22,7 +21,6 @@ export default function App() {
   };
 
   return (
-    <BrowserRouter basename="/truck_demo">
       <div style={{ padding: 20 }}>
         {!currentUser && page === "login" && (
           <Login onLogin={handleLogin} goRegister={() => setPage("register")} />
@@ -32,8 +30,5 @@ export default function App() {
         )}
         {currentUser && <Dashboard user={currentUser} onLogout={handleLogout} />}
       </div>
-    </BrowserRouter>
-
-
   );
 }
