@@ -1,7 +1,8 @@
-import  { useState } from "react";
+import { useState } from "react";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import { BrowserRouter } from "react-router-dom";
 
 export default function App() {
   const [page, setPage] = useState("login");
@@ -21,14 +22,18 @@ export default function App() {
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      {!currentUser && page === "login" && (
-        <Login onLogin={handleLogin} goRegister={() => setPage("register")} />
-      )}
-      {!currentUser && page === "register" && (
-        <Register goLogin={() => setPage("login")} />
-      )}
-      {currentUser && <Dashboard user={currentUser} onLogout={handleLogout} />}
-    </div>
+    <BrowserRouter basename="/truck_demo">
+      <div style={{ padding: 20 }}>
+        {!currentUser && page === "login" && (
+          <Login onLogin={handleLogin} goRegister={() => setPage("register")} />
+        )}
+        {!currentUser && page === "register" && (
+          <Register goLogin={() => setPage("login")} />
+        )}
+        {currentUser && <Dashboard user={currentUser} onLogout={handleLogout} />}
+      </div>
+    </BrowserRouter>
+
+
   );
 }
